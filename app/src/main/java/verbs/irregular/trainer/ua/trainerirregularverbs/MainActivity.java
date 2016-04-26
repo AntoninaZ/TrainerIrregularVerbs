@@ -12,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
     private static final String SELECT_SQL = "SELECT * FROM irregular_verbs";
 
@@ -31,9 +34,32 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         tvTranslateWord = (TextView) findViewById(R.id.translate_word);
         tvInfinitiveWord = (TextView) findViewById(R.id.infinitive_word);
-        db = new WordDataBase(this);
-        c = db.getEmployees();
-        String st = " u";
+        DatabaseHelper myDbHelper ;
+        myDbHelper = new DatabaseHelper(this);
+
+        try {
+
+            myDbHelper.createDataBase();
+
+        } catch (IOException ioe) {
+
+            throw new Error("Unable to create database");
+
+        }
+
+        try {
+            File file = new File(myDbHelper.DB_PATH);
+            if (file.exists() && !file.isDirectory())
+            myDbHelper.openDataBase();
+
+        }catch(SQLException sqle){
+
+            throw sqle;
+
+        }
+        //db = new WordDataBase(this);
+        //c = db.getEmployees();
+        //String st = " u";
     }
 
     @Override
