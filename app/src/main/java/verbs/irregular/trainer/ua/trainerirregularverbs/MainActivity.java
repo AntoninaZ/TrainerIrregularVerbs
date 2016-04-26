@@ -1,15 +1,27 @@
 package verbs.irregular.trainer.ua.trainerirregularverbs;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String SELECT_SQL = "SELECT * FROM irregular_verbs";
+
+    DatabaseHelper sqlHelper;
+    private WordDataBase db;
+
+    private Cursor c;
+
+    private TextView tvTranslateWord;
+    private TextView tvInfinitiveWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,15 +29,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        tvTranslateWord = (TextView) findViewById(R.id.translate_word);
+        tvInfinitiveWord = (TextView) findViewById(R.id.infinitive_word);
+        db = new WordDataBase(this);
+        c = db.getEmployees();
+        String st = " u";
+    }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    protected void openDatabase() {
+      //  db = openOrCreateDatabase("worddb.db", Context.MODE_PRIVATE, null);
+       // Log.d("db", db.getPath());
+    }
+
+    protected void showRecords() {
+        String id = c.getString(0);
+        String translate = c.getString(4);
+        String infinitive = c.getString(1);
+        tvTranslateWord.setText(translate);
+        tvInfinitiveWord.setText(infinitive);
     }
 
     @Override
@@ -49,4 +75,13 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        c.close();
+        db.close();
+    }
+
+
 }

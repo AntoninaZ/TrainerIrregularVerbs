@@ -8,7 +8,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:gravity="center_horizontal"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="verbs.irregular.trainer.ua.trainerirregularverbs.MainActivity"
     tools:showIn="@layout/activity_main">
@@ -17,5 +16,35 @@
         android:id="@+id/translate_word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Hello World!" />
+
+    <TextView
+        android:id="@+id/infinitive_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="36sp"
+        android:padding="30dp"
+        android:text="Heluyhb!" />
+
+    <TextView
+        android:id="@+id/past_simple_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/infinitive_word"
+        android:layout_centerHorizontal="true"
+        android:padding="20dp"
+        android:textSize="22sp"
+        android:text="Hello World!" />
+
+    <TextView
+        android:id="@+id/past_participle_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/past_simple_word"
+        android:layout_centerHorizontal="true"
+        android:textSize="22sp"
         android:text="Hello World!" />
 </RelativeLayout>
