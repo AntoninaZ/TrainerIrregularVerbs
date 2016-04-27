@@ -12,7 +12,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
  */
 public class WordDataBase extends SQLiteAssetHelper {
 
-    private static final String DATABASE_NAME = "worddb.db";
+    private static final String DATABASE_NAME = "extenalDB.db";
     private static final int DATABASE_VERSION = 1;
 
     public WordDataBase(Context context) {
